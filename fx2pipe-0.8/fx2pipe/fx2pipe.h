@@ -162,6 +162,9 @@ class FX2Pipe : public FX2USBDevice
 		
 		/// Actually run the IO code...
 		int run();
+
+        int ConnectAndInitUSB();
+        int SubmitInitialURBs();
 };
 
 #endif  /* _INCLUDE_USBIO_FX2PIPE_H_ */

@@ -65,6 +65,14 @@ int FX2Pipe::_ConnectAndInitUSB()
 	return(0);
 }
 
+int FX2Pipe::ConnectAndInitUSB()
+{
+    usb_init();
+    usb_find_busses();
+    usb_find_devices();
+    return _ConnectAndInitUSB();
+}
+
 
 void FX2Pipe::_CleanupUSB()
 {
@@ -167,6 +175,10 @@ int FX2Pipe::_SubmitOneURB()
 	return(0);
 }
 
+int FX2Pipe::SubmitInitialURBs()
+{
+    return _SubmitInitialURBs();
+}
 
 int FX2Pipe::_SubmitInitialURBs()
 {

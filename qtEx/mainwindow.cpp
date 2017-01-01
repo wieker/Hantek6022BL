@@ -4,6 +4,8 @@
 #include <qopenglfunctions.h>
 #include "/home/wieker/source/fx2pipe-0.8/fx2pipe/fx2pipe.h"
 
+#include <iostream>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -33,8 +35,12 @@ void MainWindow::on_fwButton_clicked()
 {
     FX2Pipe p;
     p.dir = -1;
-    p.firmware_hex_path = "fw.ihx";
+    p.firmware_hex_path = "../qtEx/fw.ihx";
     p.search_vid = 0x04b4;
     p.search_pid = 0x602a;
-    p.run();
+    std::cout << p.ConnectAndInitUSB();
+    std::cout << p.SubmitInitialURBs();
+    while (true) {
+        std::cout << p.ProcessEvents(1000);
+    }
 }
