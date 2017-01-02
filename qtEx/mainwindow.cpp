@@ -2,9 +2,10 @@
 #include "ui_mainwindow.h"
 #include <qopenglcontext.h>
 #include <qopenglfunctions.h>
-#include "/home/wieker/source/fx2pipe-0.8/fx2pipe/fx2pipe.h"
 
 #include <iostream>
+
+class WorkerThread;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,29 +34,40 @@ void MainWindow::on_glBox_aboutToCompose()
 
 void MainWindow::on_fwButton_clicked()
 {
-    FX2Pipe p;
-    p.dir = -1;
-    p.firmware_hex_path = "../qtEx/fw.ihx";
-    p.search_vid = 0x04b4;
-    p.search_pid = 0x602a;
-    std::cout << p.ConnectAndInitUSB() << std::endl;
-    p.dir = 1;
-    p.no_stdio = 1;
-    //std::cout << "One URB: " + p.SubmitOneURB((unsigned char *) "AaaaaBBbC", 9) << std::endl;
-    std::cout << "One URB: " + p.SubmitOneURB((unsigned char *) "BAaaaaBBbC", 10) << std::endl;
-    p.dir = -1;
-    p.no_stdio = 0;
-    std::cout << p.SubmitInitialURBs() << std::endl;
-    for (int i = 0; i < 10; i ++) {
-        std::cout << p.ProcessEvents(1000) << std::endl;
-    }
-    p.dir = 1;
-    p.no_stdio = 1;
-    std::cout << "One URB: " + p.SubmitOneURB((unsigned char *) "AaCCcCaaaBBbC", 12) << std::endl;
-    p.dir = -1;
-    p.no_stdio = 0;
-    std::cout << p.SubmitInitialURBs() << std::endl;
-    for (int i = 0; i < 10; i ++) {
-        std::cout << p.ProcessEvents(1000) << std::endl;
-    }
+    p = new FX2Pipe();
+    p->dir = -1;
+    p->firmware_hex_path = "../qtEx/fw.ihx";
+    p->search_vid = 0x04b4;
+    p->search_pid = 0x602a;
+    std::cout << "Connect: " + p->ConnectAndInitUSB() << std::endl;
+    std::cout << p->SubmitInitialURBs() << std::endl;
+    startWorkInAThread();
 }
+
+void MainWindow::startWorkInAThread()
+{
+    WorkerThread *workerThread = new WorkerThread();
+    workerThread->pipe = p;
+    //connect(workerThread, &WorkerThread::resultReady, this, &MyObject::handleResults);
+    //connect(workerThread, &WorkerThread::finished, workerThread, &QObject::deleteLater);
+    workerThread->start();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    p->dir = 1;
+    p->no_stdio = 1;
+    std::cout << "One URB: " + p->SubmitOneURB((unsigned char *) "AAA", 3) << std::endl;
+    p->dir = -1;
+    p->no_stdio = 0;
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    p->dir = 1;
+    p->no_stdio = 1;
+    std::cout << "One URB: " + p->SubmitOneURB((unsigned char *) "BBB", 3) << std::endl;
+    p->dir = -1;
+    p->no_stdio = 0;
+}
+
