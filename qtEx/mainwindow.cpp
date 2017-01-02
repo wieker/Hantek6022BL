@@ -38,9 +38,15 @@ void MainWindow::on_fwButton_clicked()
     p.firmware_hex_path = "../qtEx/fw.ihx";
     p.search_vid = 0x04b4;
     p.search_pid = 0x602a;
-    std::cout << p.ConnectAndInitUSB();
-    std::cout << p.SubmitInitialURBs();
-    while (true) {
-        std::cout << p.ProcessEvents(1000);
+    std::cout << p.ConnectAndInitUSB() << std::endl;
+    p.dir = 1;
+    p.no_stdio = 1;
+    std::cout << "One URB: " + p.SubmitOneURB() << std::endl;
+    std::cout << "One URB: " + p.SubmitOneURB() << std::endl;
+    p.dir = -1;
+    p.no_stdio = 0;
+    std::cout << p.SubmitInitialURBs() << std::endl;
+    for (int i = 0; i < 1000; i ++) {
+        std::cout << p.ProcessEvents(1000) << std::endl;
     }
 }

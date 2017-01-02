@@ -82,6 +82,10 @@ void FX2Pipe::_CleanupUSB()
 	FX2Pipe::MyURB::urb_cache.clear();
 }
 
+int FX2Pipe::SubmitOneURB()
+{
+    _SubmitOneURB();
+}
 
 int FX2Pipe::_SubmitOneURB()
 {
