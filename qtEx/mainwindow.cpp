@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    glWidget = new MyGLView(this);
 }
 
 MainWindow::~MainWindow()
@@ -21,10 +22,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_loadButton_clicked()
 {
-    ui->glBox->makeCurrent();
-    ui->glBox->context()->functions()->glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-    ui->glBox->context()->functions()->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    ui->glBox->doneCurrent();
+    /*glWidget->makeCurrent();
+    glWidget->context()->functions()->glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glWidget->context()->functions()->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glWidget->doneCurrent();*/
 }
 
 void MainWindow::on_glBox_aboutToCompose()

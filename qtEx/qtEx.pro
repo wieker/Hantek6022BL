@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     ../fx2pipe-0.8/usb_io/urbcache.cc \
     ../fx2pipe-0.8/usb_io/wwusb.cc \
     ../fx2pipe-0.8/firmware/fx2pipe_static.cc \
-    ../fx2pipe-0.8/fx2pipe/fx2pipe.cc
+    ../fx2pipe-0.8/fx2pipe/fx2pipe.cc \
+    myglview.cpp
 
 HEADERS  += mainwindow.h \
     ../fx2pipe-0.8/usb_io/cycfx2dev.h \
@@ -28,11 +29,12 @@ HEADERS  += mainwindow.h \
     ../fx2pipe-0.8/usb_io/wwusb.h \
     ../fx2pipe-0.8/lib/linkedlist.h \
     ../fx2pipe-0.8/lib/linearqueue.h \
-    ../fx2pipe-0.8/fx2pipe/fx2pipe.h
+    ../fx2pipe-0.8/fx2pipe/fx2pipe.h \
+    myglview.h
 
 FORMS    += mainwindow.ui
 
-unix|win32: LIBS += -lusb
+unix|win32: LIBS += -lusb -lGLU
 
 DISTFILES += \
     fw.ihx
