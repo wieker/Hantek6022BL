@@ -60,7 +60,7 @@ class FX2Pipe : public FX2USBDevice
 			/// \}
 		};
 	
-	private:
+    protected:
 		/// Number of successive reaped URBs with errors. 
 		/// May only be accessed by IO thread. 
 		int successive_error_urbs;
@@ -105,9 +105,7 @@ class FX2Pipe : public FX2USBDevice
 		int _SubmitInitialURBs();
 		/// Cancel all the pending osci data URBs. 
 		void _CancelAllPendingDataURBs();
-		
-		/// Overriding virtual from WWUSBDevice. 
-		ErrorCode URBNotify(URB *u);
+
 		/// Overriding virtual from WWUSBDevice. 
 		void DeleteURB(URB *u);
 		
@@ -150,6 +148,9 @@ class FX2Pipe : public FX2USBDevice
 			uchar FC_EPFIFOCFG;   // [3]
 			uchar FC_CPUCS;       // [4]
 		}__attribute__((__packed__)) fc;
+
+        /// Overriding virtual from WWUSBDevice.
+        virtual ErrorCode URBNotify(URB *u);
 		
 	private:
 		/// Do not use. 

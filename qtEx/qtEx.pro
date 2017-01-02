@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     ../fx2pipe-0.8/usb_io/wwusb.cc \
     ../fx2pipe-0.8/firmware/fx2pipe_static.cc \
     ../fx2pipe-0.8/fx2pipe/fx2pipe.cc \
-    myglview.cpp
+    myglview.cpp \
+    urbprocessor.cpp
 
 HEADERS  += mainwindow.h \
     ../fx2pipe-0.8/usb_io/cycfx2dev.h \
@@ -30,9 +31,12 @@ HEADERS  += mainwindow.h \
     ../fx2pipe-0.8/lib/linkedlist.h \
     ../fx2pipe-0.8/lib/linearqueue.h \
     ../fx2pipe-0.8/fx2pipe/fx2pipe.h \
-    myglview.h
+    myglview.h \
+    urbprocessor.h
 
 FORMS    += mainwindow.ui
+
+INCLUDEPATH += ../fx2pipe-0.8/
 
 unix|win32: LIBS += -lusb -lGLU
 

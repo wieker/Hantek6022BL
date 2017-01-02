@@ -236,11 +236,11 @@ void FX2Pipe::_DisplayTransferStatistics(const timeval *endtime,int final)
 	long long msec = 
 		1000LL*(endtime->tv_sec-starttime.tv_sec) + 
 		       (endtime->tv_usec-starttime.tv_usec+500)/1000;
-	fprintf(stderr,
+    /*fprintf(stderr,
 		"\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b"
 		"fx2pipe: %lld bytes in %lld.%03ds",
 		(long long)transferred_bytes,
-		(long long)(msec/1000),(int)(msec%1000));
+        (long long)(msec/1000),(int)(msec%1000));*/
 	if(msec>10)
 	{
 		double bps = double(transferred_bytes)*1000.0 / double(msec);
@@ -408,7 +408,7 @@ WWUSBDevice::ErrorCode FX2Pipe::URBNotify(URB *_u)
 				
 				//slurped_bytes+=u->actual_length;
 				
-				while(raw_size && !caught_sigint)
+                /*while(raw_size && !caught_sigint)
 				{
 					ssize_t wr=write(1,raw_buf,raw_size);
 					if(wr>0)
@@ -433,7 +433,7 @@ WWUSBDevice::ErrorCode FX2Pipe::URBNotify(URB *_u)
 						fprintf(stderr,"fx2pipe: EOF on stdout\n");
 						return(ECUserQuit);
 					}
-				}
+                }*/
 			}
 		}
 		else //if(dir>0)  // Write out to USB. 

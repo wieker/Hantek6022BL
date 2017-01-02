@@ -27,6 +27,7 @@
 #include <sys/poll.h>
 
 #include <assert.h>
+#include <iostream>
 
 // Initialize static data: 
 int WWUSBDevice::URB::urb_serial_counter=1;
@@ -291,12 +292,14 @@ WWUSBDevice::ErrorCode WWUSBDevice::_CancelURB(URB *u)
 
 WWUSBDevice::URB *WWUSBDevice::_ReapURB(ErrorCode *ec_rv,bool may_wait)
 {
+    std::cout << "Before USB read\n";
 	int fd=fd_from_usb_dev_handle(udh);
 	usbdevfs_urb *dev_u=NULL;
 	int reap_rv = may_wait ? 
 		ioctl(fd,USBDEVFS_REAPURB,&dev_u) : 
 		ioctl(fd,USBDEVFS_REAPURBNDELAY,&dev_u);
 	int errn=errno;
+    std::cout << "After USB read\n";
 	
 	if(reap_rv<0)
 	{
@@ -375,6 +378,7 @@ WWUSBDevice::ErrorCode WWUSBDevice::ProcessEvents(int max_delay)
 	{
 		if(!npending)
 		{  return(ECNoURBAvail);  }
+        std::cout << "Enter loop\n";
 		
 //fprintf(stderr,"loop: gather_phase=%d\n",gather_phase);
 		usbdevfs_urb *dev_u=NULL;
@@ -389,8 +393,8 @@ WWUSBDevice::ErrorCode WWUSBDevice::ProcessEvents(int max_delay)
 			pfd[0].revents=0;
 			int poll_rv=::poll(pfd,1,max_delay);
 // FIXME!!! This does not work!!!!!!!!!!!!!!
-fprintf(stderr,"fd=%d, poll_rv=%d, revents=0x%x \n",
-	pfd[0].fd,poll_rv,pfd[0].revents);
+//fprintf(stderr,"fd=%d, poll_rv=%d, revents=0x%x \n",
+//	pfd[0].fd,poll_rv,pfd[0].revents);
 			if(poll_rv<0)
 			{
 				fprintf(stderr,"poll: rv=%d (%s)\n",poll_rv,strerror(errno));
@@ -438,6 +442,7 @@ fprintf(stderr,"fd=%d, poll_rv=%d, revents=0x%x \n",
 		
 		// Now free the URB. 
 		DeleteURB(u);
+        std::cout << "Exit loop\n";
 		
 		if(urv)
 		{
