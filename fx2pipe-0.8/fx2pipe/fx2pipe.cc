@@ -82,12 +82,12 @@ void FX2Pipe::_CleanupUSB()
 	FX2Pipe::MyURB::urb_cache.clear();
 }
 
-int FX2Pipe::SubmitOneURB()
+int FX2Pipe::SubmitOneURB(unsigned char* data, size_t size)
 {
-    _SubmitOneURB();
+    _SubmitOneURB(data, size);
 }
 
-int FX2Pipe::_SubmitOneURB()
+int FX2Pipe::_SubmitOneURB(unsigned char* data, size_t size)
 {
 	if(stdio_eof)
 	{  return(0);  }
@@ -113,7 +113,12 @@ int FX2Pipe::_SubmitOneURB()
 	
 	if(dir>0)  // Write out to USB. 
 	{
-		if(no_stdio)
+        if (data != NULL)
+        {
+            u->actual_length=size;
+            memcpy(u->buffer, data, size);
+        }
+        else if(no_stdio)
 		{
 			u->actual_length=u->buffer_length;
 			memset(u->buffer,0,u->actual_length);
@@ -198,7 +203,7 @@ int FX2Pipe::_SubmitInitialURBs()
 	
 	for(int i=0; i<pipeline_size; i++)
 	{
-		if(_SubmitOneURB())
+        if(_SubmitOneURB(NULL, 0))
 		{  return(1);  }
 		if(stdio_eof)  break;
 	}
@@ -457,7 +462,7 @@ WWUSBDevice::ErrorCode FX2Pipe::URBNotify(URB *_u)
 	{  return(ECUserQuit);  }
 	
 	// For each reaped URB, we submit a new one to keep things running. 
-	if(_SubmitOneURB())
+    if(_SubmitOneURB(NULL, 0))
 	{  return(ECUserQuit);  }
 	
 	return(ECSuccess);

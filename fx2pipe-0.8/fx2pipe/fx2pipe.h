@@ -100,7 +100,7 @@ class FX2Pipe : public FX2USBDevice
 		void _CleanupUSB();
 		
 		/// Submit one URB. 0 on success; 1 on failure. 
-		int _SubmitOneURB();
+        int _SubmitOneURB(unsigned char* data, size_t size);
 		/// Submit a bunch of URBs initially to fill the pipeline. 
 		int _SubmitInitialURBs();
 		/// Cancel all the pending osci data URBs. 
@@ -165,7 +165,7 @@ class FX2Pipe : public FX2USBDevice
 
         int ConnectAndInitUSB();
         int SubmitInitialURBs();
-        int SubmitOneURB();
+        int SubmitOneURB(unsigned char* data, size_t size);
 };
 
 #endif  /* _INCLUDE_USBIO_FX2PIPE_H_ */

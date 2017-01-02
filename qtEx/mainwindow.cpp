@@ -41,12 +41,21 @@ void MainWindow::on_fwButton_clicked()
     std::cout << p.ConnectAndInitUSB() << std::endl;
     p.dir = 1;
     p.no_stdio = 1;
-    std::cout << "One URB: " + p.SubmitOneURB() << std::endl;
-    std::cout << "One URB: " + p.SubmitOneURB() << std::endl;
+    //std::cout << "One URB: " + p.SubmitOneURB((unsigned char *) "AaaaaBBbC", 9) << std::endl;
+    std::cout << "One URB: " + p.SubmitOneURB((unsigned char *) "BAaaaaBBbC", 10) << std::endl;
     p.dir = -1;
     p.no_stdio = 0;
     std::cout << p.SubmitInitialURBs() << std::endl;
-    for (int i = 0; i < 1000; i ++) {
+    for (int i = 0; i < 10; i ++) {
+        std::cout << p.ProcessEvents(1000) << std::endl;
+    }
+    p.dir = 1;
+    p.no_stdio = 1;
+    std::cout << "One URB: " + p.SubmitOneURB((unsigned char *) "AaCCcCaaaBBbC", 12) << std::endl;
+    p.dir = -1;
+    p.no_stdio = 0;
+    std::cout << p.SubmitInitialURBs() << std::endl;
+    for (int i = 0; i < 10; i ++) {
         std::cout << p.ProcessEvents(1000) << std::endl;
     }
 }
