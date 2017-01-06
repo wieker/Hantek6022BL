@@ -2,12 +2,15 @@
 #define URBPROCESSOR_H
 
 #include "fx2pipe/fx2pipe.h"
+#include "myglview.h"
 
 
 class URBProcessor : public FX2Pipe
 {
+    MyGLView* myGLView;
+
 public:
-    URBProcessor();
+    URBProcessor(MyGLView* myGLView);
 
     ErrorCode URBNotify(URB *u);
 };

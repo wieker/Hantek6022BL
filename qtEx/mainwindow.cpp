@@ -36,7 +36,7 @@ void MainWindow::on_glBox_aboutToCompose()
 
 void MainWindow::on_fwButton_clicked()
 {
-    p = new URBProcessor();
+    p = new URBProcessor(glWidget);
     p->dir = -1;
     p->firmware_hex_path = "../qtEx/fw.ihx";
     p->search_vid = 0x04b4;
