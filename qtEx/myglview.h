@@ -21,6 +21,9 @@ public:
     void _update(unsigned char* b, int q_size) {
         mutex.lock();
         std::cout << "Size: " << q_size << std::endl;
+        if (this->b != NULL) {
+            free(this->b);
+        }
         this->b = (unsigned char *) malloc(q_size);
         memcpy(this->b, b, q_size);
         this->b_size = q_size;

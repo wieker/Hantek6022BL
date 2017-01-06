@@ -10,14 +10,31 @@ MyGLView::MyGLView(QWidget* parent)
 }
 
 void MyGLView::initializeGL() {
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    glPointSize(1);
+
+    qglClearColor(QColor(0, 255, 0));
+
+    glShadeModel(GL_SMOOTH/*GL_FLAT*/);
+    glLineStipple(1, 0x3333);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
 }
 
 void MyGLView::resizeGL(int w, int h) {
-    glViewport(0, 0, w, h);
+    glViewport(0, 0, (GLint) w, (GLint) h);
+
     glMatrixMode(GL_PROJECTION);
+
+    // Set axes to div-scale and apply correction for exact pixelization
     glLoadIdentity();
-    gluOrtho2D(0, w, h, 0);
+    GLdouble pixelizationWidthCorrection = (w > 0) ? (GLdouble) w / (w - 1) : 1;
+    GLdouble pixelizationHeightCorrection = (h > 0) ? (GLdouble) h / (h - 1) : 1;
+    //glOrtho(-(DIVS_TIME / 2) * pixelizationWidthCorrection, (DIVS_TIME / 2) * pixelizationWidthCorrection, -(DIVS_VOLTAGE / 2) * pixelizationHeightCorrection, (DIVS_VOLTAGE / 2) * pixelizationHeightCorrection, -1.0, 1.0);
+
     glMatrixMode(GL_MODELVIEW);
 
 }
@@ -28,28 +45,16 @@ void MyGLView::paintGL() {
 
     std::cout << "update() " << b_size << "\n";
 
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+    glLineWidth(1);
 
-    glLineWidth(1.0);
-    glPointSize(1.0f);
-    glColor3f(1.0, 0.0, 0.0);
+    float arr[] = { 12.0f, 13.0f, 24.0f, 25.0f };
 
-    glBegin(GL_LINE_STRIP);
-    glVertex3f(10, 10, 0.0);
-    glVertex3f(20, 20, 0.0);
+    this->qglColor(QColor(0, 0, 255));
+    glVertexPointer(2, GL_FLOAT, 0, arr);
+    glDrawArrays(GL_LINE_STRIP, 0, 2);
 
-    /*for (i = 0; i < b_size; i += 2) {
-        glVertex3f(i, i % 2 ? 200: 100, 0);
-    }*/
-
-    glEnd();
     posted = 0;
-    if (b != NULL) {
-        free(b);
-    }
-    b = NULL;
-    b_size = 0;
     mutex.unlock();
 }
 
