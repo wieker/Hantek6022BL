@@ -94,3 +94,8 @@ void MainWindow::on_pushButton_5_clicked()
 
     submitCommand("30");
 }
+
+void MainWindow::on_pushButton_7_clicked()
+{
+    submitCommand("P1");
+}

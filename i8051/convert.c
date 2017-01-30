@@ -310,6 +310,27 @@ void main_init() {
     printf ( "Initialization Done.\n" );
 }
 
+void wait() {
+    int i;
+    for (i = 0; i < 100; i ++) {
+        SYNCDELAY;
+    }
+}
+
+void wait1() {
+    int i;
+    for (i = 0; i < 100; i ++) {
+        wait();
+    }
+}
+
+void wait10() {
+    int i;
+    for (i = 0; i < 1000; i ++) {
+        wait();
+    }
+}
+
 void main(void) {
     int state = 0;
     char command;
@@ -346,10 +367,123 @@ void main(void) {
             } else {
                 param = 0;
             }
-            offset = command - '0';
-            current = IOD & (1 << offset);
-            if (current != (param << offset)) {
-                IOD = IOD ^ (1 << offset);
+            if (command == 'P') {
+                IOD = 0x00;
+                wait();
+                IOD = 0x08;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x04;
+                wait();
+                IOD = 0x06;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x02;
+                wait();
+                IOD = 0x04;
+                wait();
+                IOD = 0x06;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x02;
+                wait();
+                IOD = 0x04;
+                wait();
+                IOD = 0x06;
+                wait();
+                IOD = 0x04;
+                wait();
+                IOD = 0x06;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x02;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x02;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x02;
+                wait();
+                IOD = 0x04;
+                wait();
+                IOD = 0x06;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x02;
+                wait();
+                IOD = 0x04;
+                wait();
+                IOD = 0x06;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x02;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x02;
+                wait();
+                IOD = 0x04;
+                wait();
+                IOD = 0x06;
+                wait();
+                IOD = 0x04;
+                wait();
+                IOD = 0x06;
+                wait();
+                IOD = 0x00;
+                wait();
+                IOD = 0x02;
+                wait10();
+                IOD = 0x00;
+                wait10();
+                IOD = 0x02;
+                wait10();
+                IOD = 0x00;
+                wait10();
+                IOD = 0x02;
+                wait10();
+                IOD = 0x00;
+                wait10();
+                IOD = 0x02;
+                wait10();
+                IOD = 0x00;
+                wait10();
+                IOD = 0x02;
+                wait10();
+                IOD = 0x00;
+                wait10();
+                IOD = 0x02;
+                wait10();
+                IOD = 0x00;
+                wait10();
+                IOD = 0x02;
+                wait10();
+                IOD = 0x00;
+                wait10();
+                IOD = 0x02;
+                wait10();
+                IOD = 0x00;
+                wait10();
+                IOD = 0x02;
+                wait10();
+                IOD = 0x00;
+                wait10();
+                IOD = 0x02;
+                wait10();
+            } else {
+                offset = command - '0';
+                current = IOD & (1 << offset);
+                if (current != (param << offset)) {
+                    IOD = IOD ^ (1 << offset);
+                }
             }
         }
     }
