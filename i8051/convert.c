@@ -325,7 +325,7 @@ void main(void) {
     OEC = 0xff;
     IOC = 0x00;
     OED = 0xff;
-    IOD = 0x00;
+    IOD = 0xff;
 
     for(;;)
     {
@@ -339,13 +339,33 @@ void main(void) {
             command = commands[0];
             if (command == 'A') {
                 //start_sampling();
-                IOB = 0x00;
+                IOB = 0xff;
                 IOD = IOD ^ (1 << 6);
             }
             if (command == 'B') {
                 //stop_sampling();
                 IOB = 0xff;
                 IOD = IOD ^ (1 << 7);
+            }
+            if (command == '1') {
+                //stop_sampling();
+                IOB = 0xff;
+                IOD = IOD ^ (1 << 1);
+            }
+            if (command == '2') {
+                //stop_sampling();
+                IOB = 0xff;
+                IOD = IOD ^ (1 << 2);
+            }
+            if (command == '3') {
+                //stop_sampling();
+                IOB = 0xff;
+                IOD = IOD ^ (1 << 3);
+            }
+            if (command == '4') {
+                //stop_sampling();
+                IOB = 0xff;
+                IOD = IOD ^ (1 << 4);
             }
         }
     }

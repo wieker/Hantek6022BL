@@ -53,21 +53,44 @@ void MainWindow::startWorkInAThread()
     workerThread->start();
 }
 
-void MainWindow::on_pushButton_clicked()
-{
+void MainWindow::submitCommand(char *command) {
     p->dir = 1;
     p->no_stdio = 1;
-    std::cout << "One URB: " + p->SubmitOneURB((unsigned char *) "AAA", 3) << std::endl;
+    std::cout << "One URB: " + p->SubmitOneURB((unsigned char *) command, strlen(command)) << std::endl;
     p->dir = -1;
     p->no_stdio = 0;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    submitCommand("AAA");
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    p->dir = 1;
-    p->no_stdio = 1;
-    std::cout << "One URB: " + p->SubmitOneURB((unsigned char *) "BBB", 3) << std::endl;
-    p->dir = -1;
-    p->no_stdio = 0;
+    submitCommand("BBB");
 }
 
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    submitCommand("4");
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+
+    submitCommand("3");
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+
+    submitCommand("2");
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+
+    submitCommand("1");
+}
