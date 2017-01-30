@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QThread>
-#include "/home/wieker/source/fx2pipe-0.8/fx2pipe/fx2pipe.h"
+#include "../fx2pipe-0.8/fx2pipe/fx2pipe.h"
 #include <iostream>
 #include "myglview.h"
 
@@ -42,7 +42,7 @@ private:
 class WorkerThread : public QThread
 {
     Q_OBJECT
-    void run() Q_DECL_OVERRIDE {
+    void run() {
         QString result;
         pipe->dir = -1;
         pipe->no_stdio = 0;

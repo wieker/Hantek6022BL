@@ -17,7 +17,7 @@
 #ifndef _INCLUDE_FX2PIPE_LIB_LINKEDLIST_H_
 #define _INCLUDE_FX2PIPE_LIB_LINKEDLIST_H_ 1
 
-#include "../oconfig.h"
+#include <iostream>
 
 
 /**

@@ -17,7 +17,6 @@
 #ifndef _INCLUDE_FX2PIPE_USBIO_URBCACHE_H_
 #define _INCLUDE_FX2PIPE_USBIO_URBCACHE_H_ 1
 
-#include "../oconfig.h"
 #include "../lib/linkedlist.h"
 
 #include <stdlib.h>

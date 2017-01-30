@@ -17,7 +17,6 @@
 #ifndef _INCLUDE_USBIO_WWUSB_H_
 #define _INCLUDE_USBIO_WWUSB_H_ 1
 
-#include "../oconfig.h"
 #include "../lib/linkedlist.h"
 
 #include <string.h>

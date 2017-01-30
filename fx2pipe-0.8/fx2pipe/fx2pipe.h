@@ -17,7 +17,6 @@
 #ifndef _INCLUDE_USBIO_FX2PIPE_H_
 #define _INCLUDE_USBIO_FX2PIPE_H_ 1
 
-#include "../oconfig.h"
 #include "../lib/linkedlist.h"
 #include "../usb_io/fx2usb.h"
 #include "../usb_io/urbcache.h"
@@ -75,14 +74,14 @@ class FX2Pipe : public FX2USBDevice
 		/// Time of last status display update. 
 		timeval last_update_time;
 		/// Number of bytes transferred at last update. 
-		int64 last_update_transferred;
+        long last_update_transferred;
 		
 		/// Submitted bytes: Number of bytes submitted but not all of them 
 		/// are yet transferred. 
-		int64 submitted_bytes;
+        long submitted_bytes;
 		/// Transferred bytes: 
 		/// Number of bytes successfully transferred. 
-		int64 transferred_bytes;
+        long transferred_bytes;
 		
 		/// EOF on stdio (1) or transfer limit reached (2). 
 		int stdio_eof;
@@ -118,7 +117,7 @@ class FX2Pipe : public FX2USBDevice
 		int search_vid,search_pid;
 		
 		/// Max number of bytes to transfer; negative for unlimited. 
-		int64 transfer_limit;
+        long transfer_limit;
 		
 		/// IO block size. 
 		uint io_block_size;

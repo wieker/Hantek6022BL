@@ -17,7 +17,6 @@
 #ifndef _INCLUDE_USBIO_FX2USB_H_
 #define _INCLUDE_USBIO_FX2USB_H_ 1
 
-#include "../oconfig.h"
 #include "../usb_io/wwusb.h"
 
 

@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <qopenglcontext.h>
-#include <qopenglfunctions.h>
 
 #include <iostream>
 #include "urbprocessor.h"
@@ -39,8 +37,8 @@ void MainWindow::on_fwButton_clicked()
     p = new URBProcessor(glWidget);
     p->dir = -1;
     p->firmware_hex_path = "../qtEx/fw.ihx";
-    p->search_vid = 0x04b4;
-    p->search_pid = 0x602a;
+    p->search_vid = 0x0547;
+    p->search_pid = 0x1002;
     std::cout << "Connect: " + p->ConnectAndInitUSB() << std::endl;
     std::cout << p->SubmitInitialURBs() << std::endl;
     startWorkInAThread();

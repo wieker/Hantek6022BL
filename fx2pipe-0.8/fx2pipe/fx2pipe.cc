@@ -93,7 +93,7 @@ int FX2Pipe::_SubmitOneURB(unsigned char* data, size_t size)
 	{  return(0);  }
 	
 	size_t iobs=io_block_size;
-	if(transfer_limit>=0 && transfer_limit-submitted_bytes<int64(iobs))
+    if(transfer_limit>=0 && transfer_limit-submitted_bytes<long(iobs))
 	{
 		assert(transfer_limit>=submitted_bytes);
 		iobs=transfer_limit-submitted_bytes;
