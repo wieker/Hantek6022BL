@@ -325,7 +325,7 @@ void main(void) {
     OEC = 0xff;
     IOC = 0x00;
     OED = 0xff;
-    IOD = 0xff;
+    IOD = 0x00;
 
     for(;;)
     {
