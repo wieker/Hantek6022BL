@@ -313,6 +313,9 @@ void main_init() {
 void main(void) {
     int state = 0;
     char command;
+    unsigned char param;
+    unsigned char offset;
+    unsigned char current;
 
     initEps();
     //main_init();
@@ -337,35 +340,16 @@ void main(void) {
             while(EP6CS & (1<<3));
             command = ProcessSendData();
             command = commands[0];
-            if (command == 'A') {
-                //start_sampling();
-                IOB = 0xff;
-                IOD = IOD ^ (1 << 6);
+            param = commands[1];
+            if (param == '1') {
+                param = 1;
+            } else {
+                param = 0;
             }
-            if (command == 'B') {
-                //stop_sampling();
-                IOB = 0xff;
-                IOD = IOD ^ (1 << 7);
-            }
-            if (command == '1') {
-                //stop_sampling();
-                IOB = 0xff;
-                IOD = IOD ^ (1 << 1);
-            }
-            if (command == '2') {
-                //stop_sampling();
-                IOB = 0xff;
-                IOD = IOD ^ (1 << 2);
-            }
-            if (command == '3') {
-                //stop_sampling();
-                IOB = 0xff;
-                IOD = IOD ^ (1 << 3);
-            }
-            if (command == '4') {
-                //stop_sampling();
-                IOB = 0xff;
-                IOD = IOD ^ (1 << 4);
+            offset = command - '0';
+            current = IOD & (1 << offset);
+            if (current != (param << offset)) {
+                IOD = IOD ^ (1 << offset);
             }
         }
     }

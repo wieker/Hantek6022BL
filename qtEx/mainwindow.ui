@@ -50,7 +50,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Btn6</string>
+     <string>1+</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
@@ -63,7 +63,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Btn7</string>
+     <string>1-</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -76,7 +76,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Btn3</string>
+     <string>2-</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">
@@ -89,7 +89,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Btn4</string>
+     <string>2+</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_5">
@@ -102,7 +102,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Btn1</string>
+     <string>3-</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_6">
@@ -115,7 +115,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Btn2</string>
+     <string>3+</string>
     </property>
    </widget>
   </widget>

@@ -63,34 +63,34 @@ void MainWindow::submitCommand(char *command) {
 
 void MainWindow::on_pushButton_clicked()
 {
-    submitCommand("AAA");
+    submitCommand("11");
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    submitCommand("BBB");
+    submitCommand("10");
 }
 
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    submitCommand("4");
+    submitCommand("21");
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
 
-    submitCommand("3");
+    submitCommand("20");
 }
 
 void MainWindow::on_pushButton_6_clicked()
 {
 
-    submitCommand("2");
+    submitCommand("31");
 }
 
 void MainWindow::on_pushButton_5_clicked()
 {
 
-    submitCommand("1");
+    submitCommand("30");
 }
