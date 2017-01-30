@@ -340,10 +340,12 @@ void main(void) {
             if (command == 'A') {
                 //start_sampling();
                 IOB = 0x00;
+                IOD = IOD ^ (1 << 6);
             }
             if (command == 'B') {
                 //stop_sampling();
                 IOB = 0xff;
+                IOD = IOD ^ (1 << 7);
             }
         }
     }
