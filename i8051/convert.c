@@ -326,6 +326,7 @@ void wait1() {
 
 void wait10() {
     int i;
+    IOD = IOD ^ (1 << 6);
     for (i = 0; i < 1000; i ++) {
         wait();
     }
@@ -439,7 +440,7 @@ void main(void) {
                 IOD = 0x06;
                 wait();
                 IOD = 0x00;
-                wait();
+                wait10();
                 IOD = 0x02;
                 wait10();
                 IOD = 0x00;
