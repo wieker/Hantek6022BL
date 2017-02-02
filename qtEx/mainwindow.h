@@ -46,6 +46,8 @@ private slots:
 
     void on_pushButton_8_clicked();
 
+    void on_pushButton_9_clicked();
+
 private:
     FX2Pipe* p;
     Ui::MainWindow *ui;

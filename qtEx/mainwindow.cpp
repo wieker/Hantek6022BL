@@ -146,3 +146,8 @@ void MainWindow::on_pushButton_8_clicked()
     command[i] = 0;
     submitCommandWithLength((char *) command, command[1] + 2);
 }
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    submitCommandWithLength("R", 1);
+}
