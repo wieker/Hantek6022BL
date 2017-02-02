@@ -338,6 +338,8 @@ void main(void) {
     unsigned char param;
     unsigned char offset;
     unsigned char current;
+    int i = 0;
+    int j = 0;
 
     initEps();
     //main_init();
@@ -367,6 +369,20 @@ void main(void) {
                 param = 1;
             } else {
                 param = 0;
+            }
+            if (command == 'W') {
+                for (i = 0; i < 2; i ++) {
+                    for (j = 0; j < 8; j ++) {
+                        param = 1 << j;
+                        param = commands[2 + i] & param;
+                        if (param > 0) {
+                            IOD = 0xff;
+                        } else {
+                            IOD = 0x00;
+                        }
+                        wait10();
+                    }
+                }
             }
             if (command == 'P') {
                 IOD = 0x00;

@@ -99,3 +99,32 @@ void MainWindow::on_pushButton_7_clicked()
 {
     submitCommand("P1");
 }
+
+void MainWindow::on_textEdit_textChanged()
+{
+    QString text = ui->textEdit->toPlainText();
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    QString hexCode = ui->textEdit->toPlainText();
+    hexCode.replace("\n", "");
+    QString pinStr = ui->lineEdit->text();
+    QString clkStr = ui->lineEdit_2->text();
+    QString fromStr = ui->lineEdit_3->text();
+    QString toStr = ui->lineEdit_4->text();
+
+    char* command = new char[10];
+    command[0] = 'W';
+    command[1] = pinStr.at(0).toAscii();
+    int i = 0;
+    for (i = 2; i < 9; i ++) {
+        if (hexCode.length() > i + 2) {
+            command[i] = hexCode.at(i).toAscii() - '0';
+        } else {
+            command[i] = 0;
+        }
+    }
+    command[i] = 0;
+    submitCommand((char *) command);
+}

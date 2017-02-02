@@ -42,6 +42,10 @@ private slots:
 
     void on_pushButton_7_clicked();
 
+    void on_textEdit_textChanged();
+
+    void on_pushButton_8_clicked();
+
 private:
     FX2Pipe* p;
     Ui::MainWindow *ui;
