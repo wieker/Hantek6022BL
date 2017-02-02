@@ -371,15 +371,18 @@ void main(void) {
                 param = 0;
             }
             if (command == 'W') {
-                for (i = 0; i < 8; i ++) {
+                for (i = 0; i < commands[1]; i ++) {
                     for (j = 0; j < 8; j ++) {
                         param = 1 << j;
                         param = commands[2 + i] & param;
                         if (param > 0) {
-                            IOD = 0xc0;
+                            IOD = 0x80;
                         } else {
                             IOD = 0x00;
                         }
+                        wait10();
+                        wait10();
+                        wait10();
                         wait10();
                     }
                 }

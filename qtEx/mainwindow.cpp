@@ -61,6 +61,14 @@ void MainWindow::submitCommand(char *command) {
     p->no_stdio = 0;
 }
 
+void MainWindow::submitCommandWithLength(char *command, int length) {
+    p->dir = 1;
+    p->no_stdio = 1;
+    std::cout << "One URB: " + p->SubmitOneURB((unsigned char *) command, length) << std::endl;
+    p->dir = -1;
+    p->no_stdio = 0;
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     submitCommand("11");
@@ -126,17 +134,15 @@ void MainWindow::on_pushButton_8_clicked()
 
     char* command = new char[11];
     command[0] = 'W';
-    command[1] = pinStr.at(0).toAscii();
+    command[1] = hexCode.length() / 2;
     int i = 0;
     for (i = 2; i < 10; i ++) {
         if (hexCode.length() >= i * 2 - 2) {
             unsigned char most = 0x10 * cvtToBin(hexCode.at(2 * (i - 2)).toAscii());
             unsigned char least = cvtToBin(hexCode.at(2 * (i - 2) + 1).toAscii());
             command[i] = most + least;
-        } else {
-            command[i] = command[i - 1];
         }
     }
-    command[10] = 0;
-    submitCommand((char *) command);
+    command[i] = 0;
+    submitCommandWithLength((char *) command, command[1] + 2);
 }

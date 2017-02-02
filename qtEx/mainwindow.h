@@ -52,6 +52,7 @@ private:
 
     void startWorkInAThread();
     void submitCommand(char* command);
+    void submitCommandWithLength(char *command, int length);
 };
 
 class WorkerThread : public QThread
