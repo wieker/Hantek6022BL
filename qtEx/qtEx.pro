@@ -41,4 +41,5 @@ INCLUDEPATH += ../fx2pipe-0.8/
 unix|win32: LIBS += -lusb -lGLU
 
 DISTFILES += \
-    fw.ihx
+    fw.ihx \
+    hexdump

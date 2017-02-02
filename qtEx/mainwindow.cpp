@@ -132,7 +132,7 @@ void MainWindow::on_pushButton_8_clicked()
     QString fromStr = ui->lineEdit_3->text();
     QString toStr = ui->lineEdit_4->text();
 
-    char* command = new char[11];
+    char* command = new char[hexCode.length() / 2 + 2];
     command[0] = 'W';
     command[1] = hexCode.length() / 2;
     int i = 0;
@@ -150,4 +150,9 @@ void MainWindow::on_pushButton_8_clicked()
 void MainWindow::on_pushButton_9_clicked()
 {
     submitCommandWithLength("R", 1);
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+    submitCommandWithLength("G", 1);
 }
