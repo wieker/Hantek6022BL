@@ -371,7 +371,7 @@ void main(void) {
                 param = 0;
             }
             if (command == 'W') {
-                for (i = 0; i < 2; i ++) {
+                for (i = 0; i < 8; i ++) {
                     for (j = 0; j < 8; j ++) {
                         param = 1 << j;
                         param = commands[2 + i] & param;

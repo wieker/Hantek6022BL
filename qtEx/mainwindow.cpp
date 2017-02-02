@@ -105,6 +105,16 @@ void MainWindow::on_textEdit_textChanged()
     QString text = ui->textEdit->toPlainText();
 }
 
+unsigned char cvtToBin(char hex) {
+    if (hex >= 'a') {
+        return hex - 'a';
+    } else if (hex >= 'A') {
+        return hex - 'A';
+    } {
+        return hex - '0';
+    }
+}
+
 void MainWindow::on_pushButton_8_clicked()
 {
     QString hexCode = ui->textEdit->toPlainText();
@@ -114,19 +124,19 @@ void MainWindow::on_pushButton_8_clicked()
     QString fromStr = ui->lineEdit_3->text();
     QString toStr = ui->lineEdit_4->text();
 
-    char* command = new char[10];
+    char* command = new char[11];
     command[0] = 'W';
     command[1] = pinStr.at(0).toAscii();
     int i = 0;
-    for (i = 2; i < 9; i ++) {
-        if (hexCode.length() > i + 2) {
-            command[i] = hexCode.at(i).toAscii();
+    for (i = 2; i < 10; i ++) {
+        if (hexCode.length() >= i * 2 - 2) {
+            unsigned char most = 0x10 * cvtToBin(hexCode.at(2 * (i - 2)).toAscii());
+            unsigned char least = cvtToBin(hexCode.at(2 * (i - 2) + 1).toAscii());
+            command[i] = most + least;
         } else {
-            command[i] = 0;
+            command[i] = command[i - 1];
         }
     }
-    command[2] = 0xaa;
-    command[3] = 0xaa;
-    command[i] = 0;
+    command[10] = 0;
     submitCommand((char *) command);
 }
