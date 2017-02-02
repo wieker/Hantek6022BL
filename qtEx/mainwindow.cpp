@@ -115,9 +115,9 @@ void MainWindow::on_textEdit_textChanged()
 
 unsigned char cvtToBin(char hex) {
     if (hex >= 'a') {
-        return hex - 'a';
+        return hex - 'a' + 0xa;
     } else if (hex >= 'A') {
-        return hex - 'A';
+        return hex - 'A' + 0xa;
     } {
         return hex - '0';
     }
