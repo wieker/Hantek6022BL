@@ -372,7 +372,7 @@ void main(void) {
             if (command == 'W') {
                 for (i = 0; i < commands[1]; i ++) {
                     for (j = 0; j < 8; j ++) {
-                        param = 1 << j;
+                        param = 1 << (7 - j);
                         param = commands[2 + i] & param;
                         if (param > 0) {
                             IOD = 0x80;
