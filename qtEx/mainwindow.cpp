@@ -120,11 +120,13 @@ void MainWindow::on_pushButton_8_clicked()
     int i = 0;
     for (i = 2; i < 9; i ++) {
         if (hexCode.length() > i + 2) {
-            command[i] = hexCode.at(i).toAscii() - '0';
+            command[i] = hexCode.at(i).toAscii();
         } else {
             command[i] = 0;
         }
     }
+    command[2] = 0xaa;
+    command[3] = 0xaa;
     command[i] = 0;
     submitCommand((char *) command);
 }

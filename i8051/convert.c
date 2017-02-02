@@ -376,7 +376,7 @@ void main(void) {
                         param = 1 << j;
                         param = commands[2 + i] & param;
                         if (param > 0) {
-                            IOD = 0xff;
+                            IOD = 0xc0;
                         } else {
                             IOD = 0x00;
                         }
