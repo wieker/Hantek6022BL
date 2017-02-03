@@ -69,6 +69,16 @@ static char ProcessSendData(void)
     return 'a';
 }
 
+void writeOut(unsigned char c, unsigned char v) {
+    xdata unsigned char *dest=EP6FIFOBUF;
+    dest[0] = 'A';
+    dest[1] = c;
+    dest[2] = v;
+    dest[3] = 0;
+    SYNCDELAY;  EP6BCH=0;
+    SYNCDELAY;  EP6BCL=4;
+}
+
 #define printf(...)
 
 // change to support as many interfaces as you need
@@ -369,7 +379,9 @@ void main(void) {
             }
             if (command == 'W') {
                 IOD = 0x00;
+                OED = 0x8f;
                 for (i = 0; i < commands[1]; i ++) {
+                    int v = 0;
                     for (j = 0; j < 8; j ++) {
                         param = 1 << (7 - j);
                         param = commands[2 + i] & param;
@@ -384,7 +396,12 @@ void main(void) {
                         IOD ^= (1 << 1);
                         wait10();
                         wait10();
+                        v <<= 1;
+                        if ((IOD & 0x40) > 0) {
+                            v += 1;
+                        }
                     }
+                    writeOut(i, v);
                 }
             }
             if (command == 'R') {

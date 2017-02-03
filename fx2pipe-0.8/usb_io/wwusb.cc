@@ -292,14 +292,12 @@ WWUSBDevice::ErrorCode WWUSBDevice::_CancelURB(URB *u)
 
 WWUSBDevice::URB *WWUSBDevice::_ReapURB(ErrorCode *ec_rv,bool may_wait)
 {
-    std::cout << "Before USB read\n";
 	int fd=fd_from_usb_dev_handle(udh);
 	usbdevfs_urb *dev_u=NULL;
 	int reap_rv = may_wait ? 
 		ioctl(fd,USBDEVFS_REAPURB,&dev_u) : 
 		ioctl(fd,USBDEVFS_REAPURBNDELAY,&dev_u);
-	int errn=errno;
-    std::cout << "After USB read\n";
+    int errn=errno;
 	
 	if(reap_rv<0)
 	{
@@ -377,8 +375,7 @@ WWUSBDevice::ErrorCode WWUSBDevice::ProcessEvents(int max_delay)
 	for(;;)
 	{
 		if(!npending)
-		{  return(ECNoURBAvail);  }
-        std::cout << "Enter loop\n";
+        {  return(ECNoURBAvail);  }
 		
 //fprintf(stderr,"loop: gather_phase=%d\n",gather_phase);
 		usbdevfs_urb *dev_u=NULL;
@@ -441,8 +438,7 @@ WWUSBDevice::ErrorCode WWUSBDevice::ProcessEvents(int max_delay)
 		ErrorCode urv=URBNotify(u);
 		
 		// Now free the URB. 
-		DeleteURB(u);
-        std::cout << "Exit loop\n";
+        DeleteURB(u);
 		
 		if(urv)
 		{
