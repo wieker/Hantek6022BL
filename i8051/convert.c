@@ -354,7 +354,7 @@ void main(void) {
 
     OEA = 0xff;
     IOA = 0x00;
-    OEB = 0xff;
+    OEB = 0x00;
     IOB = 0x00;
     OEC = 0xff;
     IOC = 0x00;
@@ -379,7 +379,6 @@ void main(void) {
             }
             if (command == 'W') {
                 IOD = 0x00;
-                OED = 0x8f;
                 for (i = 0; i < commands[1]; i ++) {
                     int v = 0;
                     for (j = 0; j < 8; j ++) {
@@ -396,10 +395,7 @@ void main(void) {
                         IOD ^= (1 << 1);
                         wait10();
                         wait10();
-                        v <<= 1;
-                        if ((IOD & 0x40) > 0) {
-                            v += 1;
-                        }
+                        v |= (IOB & 0x80) >> j;
                     }
                     writeOut(i, v);
                 }
