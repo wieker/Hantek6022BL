@@ -382,6 +382,7 @@ void main(void) {
                 for (i = 0; i < commands[1]; i ++) {
                     int v = 0;
                     for (j = 0; j < 8; j ++) {
+                        v |= (IOB & 0x80) >> j;
                         param = 1 << (7 - j);
                         param = commands[2 + i] & param;
                         if (param > 0) {
@@ -395,7 +396,6 @@ void main(void) {
                         IOD ^= (1 << 1);
                         wait10();
                         wait10();
-                        v |= (IOB & 0x80) >> j;
                     }
                     writeOut(i, v);
                 }
