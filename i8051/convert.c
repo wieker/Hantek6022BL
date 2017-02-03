@@ -391,11 +391,11 @@ void main(void) {
                             IOD = 0x00;
                         }
                         IOD ^= (1 << 1);
-                        wait10();
-                        wait10();
+                        wait();
+                        wait();
                         IOD ^= (1 << 1);
-                        wait10();
-                        wait10();
+                        wait();
+                        wait();
                     }
                     writeOut(i, v);
                 }
