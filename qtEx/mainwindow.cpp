@@ -136,7 +136,7 @@ void MainWindow::on_pushButton_8_clicked()
     command[0] = 'W';
     command[1] = hexCode.length() / 2;
     int i = 0;
-    for (i = 2; i < 10; i ++) {
+    for (i = 2; i < hexCode.length() / 2 + 2; i ++) {
         if (hexCode.length() >= i * 2 - 2) {
             unsigned char most = 0x10 * cvtToBin(hexCode.at(2 * (i - 2)).toAscii());
             unsigned char least = cvtToBin(hexCode.at(2 * (i - 2) + 1).toAscii());
