@@ -43,3 +43,6 @@ unix|win32: LIBS += -lusb -lGLU
 DISTFILES += \
     fw.ihx \
     hexdump
+
+OTHER_FILES += \
+    pbavr/build.sh

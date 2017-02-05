@@ -28,6 +28,7 @@
 
 #include <assert.h>
 #include <iostream>
+#include <stdio.h>
 
 // Initialize static data: 
 int WWUSBDevice::URB::urb_serial_counter=1;

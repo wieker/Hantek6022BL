@@ -22,6 +22,8 @@
 
 #include <assert.h>
 
+#include <stdio.h>
+
 
 FX2USBDevice::ErrorCode FX2USBDevice::_DownloadFirmware(
 	struct usb_device *usbdev,const char *path,const char **static_firmware,
