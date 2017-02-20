@@ -17,7 +17,7 @@ main()
         while(1)
         {
                 PORTB &= ~(1<<PB4);/* PC2 LOW */
-                _delay_ms(1000);/* 100 ms delay */
+                _delay_ms(100);/* 100 ms delay */
 
                 PORTB |=(1<<PB4); /* PC2 HIGH */
                 _delay_ms(1000);/* 100 ms delay */
