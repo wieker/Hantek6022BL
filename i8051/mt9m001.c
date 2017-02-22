@@ -70,6 +70,7 @@ void main(void) {
     for(;;)
     {
         IOB = 0xff;
+        IOB = 0xff;
         IOB = 0x00;
     }
 }
