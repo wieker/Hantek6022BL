@@ -138,8 +138,8 @@ void MainWindow::on_pushButton_8_clicked()
     int i = 0;
     for (i = 2; i < hexCode.length() / 2 + 2; i ++) {
         if (hexCode.length() >= i * 2 - 2) {
-            unsigned char most = 0x10 * cvtToBin(hexCode.at(2 * (i - 2)).toAscii());
-            unsigned char least = cvtToBin(hexCode.at(2 * (i - 2) + 1).toAscii());
+            unsigned char most = 0x10 * cvtToBin(hexCode.at(2 * (i - 2)).toLatin1());
+            unsigned char least = cvtToBin(hexCode.at(2 * (i - 2) + 1).toLatin1());
             command[i] = most + least;
         }
     }
