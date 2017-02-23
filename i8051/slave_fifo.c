@@ -43,8 +43,11 @@ static void Initialize(void)
     EP6AUTOINLENH = 0x02; SYNCDELAY;  // MSB
     EP6AUTOINLENL = 0x00; SYNCDELAY;  // LSB
 
+    EP2FIFOCFG = 0x00;  SYNCDELAY;
+    EP4FIFOCFG = 0x00;  SYNCDELAY;
+    EP8FIFOCFG = 0x00;  SYNCDELAY;
     OED = 0xff;
-    IOD = 0x00;
+    IOD = 0x01;
     OEA = 0xff;
     IOA = 0xf0;
 }
