@@ -42,6 +42,11 @@ static void Initialize(void)
     // USB packet is committed. Use 512 bytes to be sure.
     EP6AUTOINLENH = 0x02; SYNCDELAY;  // MSB
     EP6AUTOINLENL = 0x00; SYNCDELAY;  // LSB
+
+    OED = 0xff;
+    IOD = 0x07;
+    OEA = 0xff;
+    IOA = 0xff;
 }
 
 void main()
