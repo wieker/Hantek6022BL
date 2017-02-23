@@ -44,9 +44,9 @@ static void Initialize(void)
     EP6AUTOINLENL = 0x00; SYNCDELAY;  // LSB
 
     OED = 0xff;
-    IOD = 0x07;
+    IOD = 0x00;
     OEA = 0xff;
-    IOA = 0xff;
+    IOA = 0xf0;
 }
 
 void main()
