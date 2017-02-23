@@ -125,7 +125,7 @@ void main(void) {
     SYNCDELAY;
     FIFOPINPOLAR = 0x00;
     SYNCDELAY;
-    IOD = 0x89; //0x89
+    IOD = 0x0f; //0x89
 
 
     for(;;)

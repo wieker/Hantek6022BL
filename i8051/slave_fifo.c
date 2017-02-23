@@ -47,9 +47,11 @@ static void Initialize(void)
     EP4FIFOCFG = 0x00;  SYNCDELAY;
     EP8FIFOCFG = 0x00;  SYNCDELAY;
     OED = 0xff;
-    IOD = 0xe9;
+    IOD = 0x00;
     OEA = 0xff;
     IOA = 0x00;
+    SYNCDELAY;
+    IOD = 0x0f;
 }
 
 void main()
