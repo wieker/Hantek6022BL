@@ -16,7 +16,7 @@ static void Initialize(void)
 
     // Internally clocked (48MHz) sync slave fifo mode.
     // Output to IFCLK not enabled (set bit5 to enable).
-    IFCONFIG = 0xc3;  SYNCDELAY;
+    IFCONFIG = 0x03;  SYNCDELAY;
     REVCTL = 0x03;    SYNCDELAY;  // See TRM...
 
     // Configure EP6 (IN) for bulk input, quad-buffered (4*512 bytes).
