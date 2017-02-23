@@ -30,7 +30,7 @@ static void Initialize(void)
     FIFORESET = 0x00;  SYNCDELAY;  // Resume normal operation.
 
     // Configure EP6 for AUTOIN, 16bit wide bus.
-    EP6FIFOCFG = 0x0d;  SYNCDELAY;
+    EP6FIFOCFG = 0x08;  SYNCDELAY;
 
     // PORTACFG: FLAGD SLCS(*) 0 0 0 0 INT1 INT0
     PORTACFG = 0x00;  SYNCDELAY; // (delay maybe not needed)
