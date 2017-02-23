@@ -36,7 +36,7 @@ static void Initialize(void)
     PORTACFG = 0x00;  SYNCDELAY; // (delay maybe not needed)
 
     // All default polarities: SLWR active low,...
-    FIFOPINPOLAR=0x00;  SYNCDELAY;
+    FIFOPINPOLAR=0x1f;  SYNCDELAY;
 
     // This determines how much data is accumulated in the FIFOs before a
     // USB packet is committed. Use 512 bytes to be sure.
@@ -47,7 +47,7 @@ static void Initialize(void)
     EP4FIFOCFG = 0x00;  SYNCDELAY;
     EP8FIFOCFG = 0x00;  SYNCDELAY;
     OED = 0xff;
-    IOD = 0x07;
+    IOD = 0xe9;
     OEA = 0xff;
     IOA = 0x00;
 }
