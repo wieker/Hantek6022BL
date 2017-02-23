@@ -21,7 +21,7 @@ void main(void) {
     SYNCDELAY;
     REVCTL = 0x03;
     SYNCDELAY;
-    EP8CFG = 0xE0;
+    EP6CFG = 0xE0;
     SYNCDELAY;
     FIFORESET = 0x80;
     SYNCDELAY;
@@ -35,7 +35,8 @@ void main(void) {
     SYNCDELAY;
     FIFORESET = 0x00;
     SYNCDELAY;
-    EP8FIFOCFG = 0x0C;
+    EP6FIFOCFG = 0x08;
+    SYNCDELAY;
     PINFLAGSAB = 0x00;
     SYNCDELAY;
     PINFLAGSCD = 0x00;
@@ -44,20 +45,20 @@ void main(void) {
     SYNCDELAY;
     FIFOPINPOLAR = 0x00;
     SYNCDELAY;
-    EP8AUTOINLENH = 0x02;
+    EP6AUTOINLENH = 0x02;
     SYNCDELAY;
-    EP8AUTOINLENL = 0x00;
+    EP6AUTOINLENL = 0x00;
     SYNCDELAY;
-    EP8FIFOPFH = 0x80;
+    EP6FIFOPFH = 0x80;
     SYNCDELAY;
-    EP8FIFOPFL = 0x00;
+    EP6FIFOPFL = 0x00;
 
     OED = 0xff;
-    IOD = 0x00; //0xc9
+    IOD = 0xc0;
     OEA = 0xff;
-    IOA = 0x00;
+    IOA = 0xff;
     SYNCDELAY;
-    IOD = 0xc9; //0xc9
+    IOD = 0xc9;
 
     for (;;);
 }
