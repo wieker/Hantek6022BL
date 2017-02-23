@@ -31,7 +31,7 @@ BYTE set_samplerate(BYTE rate);
 char commands[100];
 
 void initEps() {
-    CPUCS=0x10;                  // 48 MHz, CLKOUT output disabled.
+    CPUCS=0x12;                  // 48 MHz, CLKOUT output disabled.
     IFCONFIG=0xc0;   SYNCDELAY;  // Internal IFCLK, 48MHz; A,B as normal ports.
     REVCTL=0x03;     SYNCDELAY;  // See TRM...
     EP6CFG=0xe2;     SYNCDELAY;  // 1110 0010 (bulk IN, 512 bytes, double-buffered)
@@ -45,6 +45,59 @@ void initEps() {
     EP2FIFOCFG=0x00; SYNCDELAY;  // Make sure AUTOOUT=0.
     OUTPKTEND=0x82;  SYNCDELAY;  // Be sure to clear the 2 buffers...
     OUTPKTEND=0x82;  SYNCDELAY;  // ...(double-buffered) (required!).
+}
+
+static char ProcessSendData(void)
+{
+    xdata const unsigned char *src=EP2FIFOBUF;
+    xdata unsigned char *dest=EP6FIFOBUF;
+    unsigned int len = ((int)EP2BCH)<<8 | EP2BCL;
+    unsigned int i;
+    for(i=0; i<len && i < sizeof(commands); i++,src++)
+    {
+        commands[i] = *src;
+    }
+    ;;
+
+    // "Skip" the received OUT packet to "forget" it (see TRM p. 9-26):
+    SYNCDELAY;  OUTPKTEND=0x82;
+
+    // Arm the endpoint. Be sure to set BCH before BCL because BCL access
+    // actually arms the endpoint.
+    //SYNCDELAY;  EP6BCH=len>>8;
+    //SYNCDELAY;  EP6BCL=len&0xff;
+    return 'a';
+}
+
+void writeOut(unsigned char c, unsigned char v) {
+    xdata unsigned char *dest=EP6FIFOBUF;
+    dest[0] = 'A';
+    dest[1] = c;
+    dest[2] = v;
+    dest[3] = 0;
+    SYNCDELAY;  EP6BCH=0;
+    SYNCDELAY;  EP6BCL=4;
+}
+
+void wait() {
+    int i;
+    for (i = 0; i < 100; i ++) {
+        SYNCDELAY;
+    }
+}
+
+void wait1() {
+    int i;
+    for (i = 0; i < 100; i ++) {
+        wait();
+    }
+}
+
+void wait10() {
+    int i;
+    for (i = 0; i < 1000; i ++) {
+        wait();
+    }
 }
 
 void main(void) {
@@ -67,11 +120,24 @@ void main(void) {
     OED = 0xff;
     IOD = 0x00;
 
+
     for(;;)
     {
-        IOB = 0xff;
-        IOB = 0xff;
-        IOB = 0x00;
+        // Wait for input on EP2 (EP2 non-empty).
+        if(!(EP2CS & (1<<2)))
+        {
+            // Wait for EP6 buffer to become non-full so that we don't
+            // overwrite content.
+            while(EP6CS & (1<<3));
+            command = ProcessSendData();
+            command = commands[0];
+            if (command == 'W') {
+                for (i = 0; i < commands[1]; i ++) {
+                    IOD = commands[i + 2];
+                    wait();
+                }
+            }
+        }
     }
 }
 
