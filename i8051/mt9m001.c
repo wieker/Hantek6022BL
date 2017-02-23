@@ -34,7 +34,7 @@ void initEps() {
     CPUCS=0x12;                  // 48 MHz, CLKOUT output enabled.
     IFCONFIG=0xc0;   SYNCDELAY;  // Internal IFCLK, 48MHz; A,B as normal ports.
     REVCTL=0x03;     SYNCDELAY;  // See TRM...
-    EP6CFG=0xe2;     SYNCDELAY;  // 1110 0010 (bulk IN, 512 bytes, double-buffered)
+    EP6CFG=0xe0;     SYNCDELAY;  // 1110 0010 (bulk IN, 512 bytes, double-buffered)
     EP2CFG=0xa2;     SYNCDELAY;  // 1010 0010 (bulk OUT, 512 bytes, double-buffered)
     FIFORESET=0x80;  SYNCDELAY;  // NAK all requests from host.
     FIFORESET=0x82;  SYNCDELAY;  // Reset individual EP (2,4,6,8)
@@ -123,7 +123,9 @@ void main(void) {
     OED = 0xff;
     IOD = 0x00; //0x89
     SYNCDELAY;
-    //IOD = 0x89; //0x89
+    IOD = 0x89; //0x89
+    FIFOPINPOLAR = 0x1f;
+    SYNCDELAY;
 
 
     for(;;)
@@ -144,9 +146,15 @@ void main(void) {
             }
             if (command == 'R') {
                 CPUCS=0x12;                  // 48 MHz, CLKOUT output enabled.
-                IFCONFIG=0x23;   SYNCDELAY;  // External IFCLK; A as slave FIFO, B as normal port.
-                EP6FIFOCFG=0x00; SYNCDELAY;
+                IFCONFIG=0x03;   SYNCDELAY;  // External IFCLK; A as slave FIFO, B as normal port.
+                EP6FIFOCFG=0x0C; SYNCDELAY;
                 OED = 0xff;
+                FIFOPINPOLAR = 0x1f;
+                SYNCDELAY;
+                EP8AUTOINLENH = 0x02; // EZ-USB automatically commits data in 512-byte chunks
+                SYNCDELAY;
+                EP8AUTOINLENL = 0x00;
+                SYNCDELAY;
             }
         }
     }
