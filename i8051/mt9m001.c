@@ -43,6 +43,9 @@ void initEps() {
     FIFORESET=0x88;  SYNCDELAY;
     FIFORESET=0x00;  SYNCDELAY;  // Resume normal operation.
     EP2FIFOCFG=0x00; SYNCDELAY;  // Make sure AUTOOUT=0.
+    EP4FIFOCFG=0x00; SYNCDELAY;  // Make sure AUTOOUT=0.
+    EP6FIFOCFG=0x00; SYNCDELAY;  // Make sure AUTOOUT=0.
+    EP8FIFOCFG=0x00; SYNCDELAY;  // Make sure AUTOOUT=0.
     OUTPKTEND=0x82;  SYNCDELAY;  // Be sure to clear the 2 buffers...
     OUTPKTEND=0x82;  SYNCDELAY;  // ...(double-buffered) (required!).
 }
@@ -143,6 +146,7 @@ void main(void) {
                 CPUCS=0x12;                  // 48 MHz, CLKOUT output enabled.
                 IFCONFIG=0x23;   SYNCDELAY;  // External IFCLK; A as slave FIFO, B as normal port.
                 EP6FIFOCFG=0x00; SYNCDELAY;
+                OED = 0xff;
             }
         }
     }
