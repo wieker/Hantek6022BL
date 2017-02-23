@@ -31,7 +31,7 @@ BYTE set_samplerate(BYTE rate);
 char commands[100];
 
 void initEps() {
-    CPUCS=0x12;                  // 48 MHz, CLKOUT output disabled.
+    CPUCS=0x12;                  // 48 MHz, CLKOUT output enabled.
     IFCONFIG=0xc0;   SYNCDELAY;  // Internal IFCLK, 48MHz; A,B as normal ports.
     REVCTL=0x03;     SYNCDELAY;  // See TRM...
     EP6CFG=0xe2;     SYNCDELAY;  // 1110 0010 (bulk IN, 512 bytes, double-buffered)
@@ -118,7 +118,9 @@ void main(void) {
     OEC = 0xff;
     IOC = 0x00;
     OED = 0xff;
-    IOD = 0x00;
+    IOD = 0x00; //0x89
+    SYNCDELAY;
+    //IOD = 0x89; //0x89
 
 
     for(;;)
@@ -136,6 +138,11 @@ void main(void) {
                     IOD = commands[i + 2];
                     wait();
                 }
+            }
+            if (command == 'R') {
+                CPUCS=0x12;                  // 48 MHz, CLKOUT output enabled.
+                IFCONFIG=0x23;   SYNCDELAY;  // External IFCLK; A as slave FIFO, B as normal port.
+                EP6FIFOCFG=0x00; SYNCDELAY;
             }
         }
     }
