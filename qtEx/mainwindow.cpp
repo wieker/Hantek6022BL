@@ -156,3 +156,8 @@ void MainWindow::on_pushButton_10_clicked()
 {
     submitCommandWithLength("G", 1);
 }
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    glWidget->update();
+}
