@@ -108,11 +108,6 @@ void MainWindow::on_pushButton_7_clicked()
     submitCommand("P1");
 }
 
-void MainWindow::on_textEdit_textChanged()
-{
-    QString text = ui->textEdit->toPlainText();
-}
-
 unsigned char cvtToBin(char hex) {
     if (hex >= 'a') {
         return hex - 'a' + 0xa;
@@ -121,30 +116,6 @@ unsigned char cvtToBin(char hex) {
     } {
         return hex - '0';
     }
-}
-
-void MainWindow::on_pushButton_8_clicked()
-{
-    QString hexCode = ui->textEdit->toPlainText();
-    hexCode.replace("\n", "");
-    QString pinStr = ui->lineEdit->text();
-    QString clkStr = ui->lineEdit_2->text();
-    QString fromStr = ui->lineEdit_3->text();
-    QString toStr = ui->lineEdit_4->text();
-
-    char* command = new char[hexCode.length() / 2 + 2];
-    command[0] = 'W';
-    command[1] = hexCode.length() / 2;
-    int i = 0;
-    for (i = 2; i < hexCode.length() / 2 + 2; i ++) {
-        if (hexCode.length() >= i * 2 - 2) {
-            unsigned char most = 0x10 * cvtToBin(hexCode.at(2 * (i - 2)).toLatin1());
-            unsigned char least = cvtToBin(hexCode.at(2 * (i - 2) + 1).toLatin1());
-            command[i] = most + least;
-        }
-    }
-    command[i] = 0;
-    submitCommandWithLength((char *) command, command[1] + 2);
 }
 
 void MainWindow::on_pushButton_9_clicked()

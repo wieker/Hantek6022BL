@@ -4,7 +4,7 @@
 
 MyWidget::MyWidget(QWidget *parent) : QWidget(parent)
 {
-    resize(320, 240);
+    setGeometry(0, 50, 960, 768);
 }
 
 void MyWidget::_update(unsigned char *b, int q_size) {
@@ -24,12 +24,12 @@ void MyWidget::_update(unsigned char *b, int q_size) {
 void MyWidget::paintEvent(QPaintEvent *) {
     QPainter painter(this);
 
-    QRectF rectangle(0.0, 0.0, 320.0, 240.0);
+    QRectF rectangle(0.0, 0.0, 960.0, 768.0);
     QImage image = QImage(1280, 1024, QImage::Format_RGB32);
     int pos = 0;
     for (int i = 0; i < 1024; i ++) {
         for (int j = 0; j < 1280; j ++) {
-            image.setPixel(j, i, qRgba(buf[pos] * 10, (int) buf[pos] * 10, (int) buf[pos] * 10, 0));
+            image.setPixel(j, i, qRgba(buf[pos] * 5, (int) buf[pos] * 5, (int) buf[pos] * 5, 0));
             if (pos < 100) (std::cout << std::hex) << (int) buf[pos];
             if (pos < 100) std::cout << " ";
             pos ++;
