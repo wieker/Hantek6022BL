@@ -1,7 +1,7 @@
 #include "urbprocessor.h"
 #include <iostream>
 
-URBProcessor::URBProcessor(MyGLView* myGLView)
+URBProcessor::URBProcessor(MyWidget* myGLView)
 {
     this->myGLView = myGLView;
 }

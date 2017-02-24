@@ -5,7 +5,7 @@
 #include <QThread>
 #include "../fx2pipe-0.8/fx2pipe/fx2pipe.h"
 #include <iostream>
-#include "myglview.h"
+#include "mywidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,7 +19,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    MyGLView* glWidget;
+    MyWidget* glWidget;
 
 private slots:
     void on_loadButton_clicked();

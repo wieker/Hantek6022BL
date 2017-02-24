@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     ../fx2pipe-0.8/firmware/fx2pipe_static.cc \
     ../fx2pipe-0.8/fx2pipe/fx2pipe.cc \
     myglview.cpp \
-    urbprocessor.cpp
+    urbprocessor.cpp \
+    mywidget.cpp
 
 HEADERS  += mainwindow.h \
     ../fx2pipe-0.8/usb_io/cycfx2dev.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     ../fx2pipe-0.8/lib/linearqueue.h \
     ../fx2pipe-0.8/fx2pipe/fx2pipe.h \
     myglview.h \
-    urbprocessor.h
+    urbprocessor.h \
+    mywidget.h
 
 FORMS    += mainwindow.ui
 
