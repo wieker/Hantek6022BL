@@ -9,6 +9,7 @@ class MyWidget : public QWidget
     int cpos = 0;
     unsigned char* buf = new unsigned char[1280 * 1024];
     int updated = 0;
+    int color = 0;
 
     Q_OBJECT
 public:
